@@ -1,12 +1,6 @@
-local new = false
+local KEKW = false
 local allowed = false
 local va = false
-
-RegisterNetEvent('anticheat:auth')
-AddEventHandler('anticheat:auth', function()
-    while true do
-    end
-end)
 
 Citizen.CreateThread(function()
 	while true do
@@ -14,7 +8,7 @@ Citizen.CreateThread(function()
         Citizen.Wait(60000)
         local playerPed = PlayerPedId()
 		if IsPedSittingInAnyVehicle(playerPed) and IsVehicleVisible(GetVehiclePedIsIn(playerPed, false)) then
-            TriggerServerEvent('anticheat:ban', source, 'Car Invisible')
+            TriggerServerEvent('aramsamsam:ban', source, 'Car Invisible')
 		end
 	end
 end)
@@ -23,7 +17,7 @@ end)
 -- Anti NUI Devtools
 RegisterNUICallback(GetCurrentResourceName(), function()
     if Lightshield_Client.AntiNuiDevtools ~= true then return end
-    TriggerServerEvent('anticheat:ban', source, 'NUI Devtools detected')
+    TriggerServerEvent('aramsamsam:ban', source, 'NUI Devtools detected')
 end)
 
 -- Anti Weapon Pickup
@@ -52,7 +46,7 @@ Citizen.CreateThread(function()
 
              else
                  if IsPedInAnyVehicle(GetPlayerPed(-1)) then
-                     TriggerServerEvent('anticheat:ban', source, 'Vehicle-Plate Change detected')
+                     TriggerServerEvent('aramsamsam:ban', source, 'Vehicle-Plate Change detected')
                  end
              end
        end
@@ -68,7 +62,7 @@ Citizen.CreateThread(function()
         for i = 1, #_activeplayers do
             if i ~= _pid then
                 if DoesBlipExist(GetBlipFromEntity(GetPlayerPed(i))) then
-                    TriggerServerEvent('anticheat:ban', source, 'blips detected')
+                    TriggerServerEvent('aramsamsam:ban', source, 'blips detected')
                 end
             end
             Citizen.Wait(1)
@@ -101,7 +95,7 @@ Citizen.CreateThread(function()
         if IsPedSittingInAnyVehicle(PlayerPedId()) then
             if cI == cy and cJ ~= cz and cz ~= nil and cz ~= 0 then
                 DeleteVehicle(cI)
-                TriggerServerEvent('anticheat:ban', source, 'Cheat Engine Detected')
+                TriggerServerEvent('aramsamsam:ban', source, 'Cheat Engine Detected')
                 return
             end
         end
@@ -118,11 +112,11 @@ Citizen.CreateThread(function()
         Citizen.Wait(2500)
         if GetUsingnightvision(true) then
             if Lightshield_Client.AntiNightVision ~= true then return end
-            TriggerServerEvent('anticheat:ban', source, 'Night Vision detected')
+            TriggerServerEvent('aramsamsam:ban', source, 'Night Vision detected')
         end
         if GetUsingseethrough(true) then
             if Lightshield_Client.AntiThermalVision ~= true then return end
-            TriggerServerEvent('anticheat:ban', source, 'Thermal Vision detected')
+            TriggerServerEvent('aramsamsam:ban', source, 'Thermal Vision detected')
         end
     end
 end)
@@ -134,7 +128,7 @@ Citizen.CreateThread(function()
         Citizen.Wait(3000)
         local ped = NetworkIsInSpectatorMode()
         if ped == 1 then
-            TriggerServerEvent('anticheat:ban', source, 'Spectate detected')
+            TriggerServerEvent('aramsamsam:ban', source, 'Spectate detected')
         end
     end
 end)
@@ -149,7 +143,7 @@ Citizen.CreateThread(function()
             local PedFlag = GetPedConfigFlag(PlayerPedId(), 223, true)
 
             if PedFlag then
-                TriggerServerEvent('anticheat:ban', source, 'Tiny Ped')
+                TriggerServerEvent('aramsamsam:ban', source, 'Tiny Ped')
             end
         end
     end)
@@ -164,7 +158,7 @@ Citizen.CreateThread(function()
         local ped = GetPlayerPed(-1)
         local camcoords = (GetEntityCoords(ped) - GetFinalRenderedCamCoord())
         if (camcoords.x > 35) or (camcoords.y > 35) or (camcoords.z > 35) or (camcoords.x < -35) or (camcoords.y < -35) or (camcoords.z < -35) then
-            TriggerServerEvent('anticheat:ban', source, 'Freecam detected')
+            TriggerServerEvent('aramsamsam:ban', source, 'Freecam detected')
         end
     end
 end)
@@ -172,16 +166,16 @@ end)
 -- Anti Invisible
 Citizen.CreateThread(function()
     while true do
-        if new == false then
+        if KEKW == false then
             Wait(30000)
-            new = true
+            KEKW = true
         end
         if Lightshield_Client.AntiInvisible ~= true then return end
         Citizen.Wait(5000)
         local ped = GetPlayerPed(-1)
         local entityalpha = GetEntityAlpha(ped)
         if not IsEntityVisible(ped) or not IsEntityVisibleToScript(ped) or entityalpha <= 150 then
-            TriggerServerEvent('anticheat:ban', source, 'Invisibility detected')
+            TriggerServerEvent('aramsamsam:ban', source, 'Invisibility detected')
         end
     end
 end)
@@ -190,12 +184,12 @@ Citizen.CreateThread(function()
     while true do
         if Lightshield_Client.AntiDump ~= true then return end
         RegisterNUICallback("loadNuis", function(data, cb)
-            TriggerServerEvent('anticheat:ban', source, 'Dump Detected')
+            TriggerServerEvent('aramsamsam:ban', source, 'Dump Detected')
 end)
 local oldLoadResourceFile = LoadResourceFile
 LoadResourceFile = function(_resourceName, _fileName)
     if (_resourceName ~= GetCurrentResourceName()) then
-        TriggerServerEvent('anticheat:ban', source, 'Dump Detected')
+        TriggerServerEvent('aramsamsam:ban', source, 'Dump Detected')
     else
         oldLoadResourceFile(_resourceName, _fileName)
     end
@@ -225,7 +219,7 @@ Citizen.CreateThread(function()
         Citizen.Wait(5000)
         local weapondamage = GetWeaponDamageType(GetSelectedPedWeapon(_ped))
         if weapondamage == 4 or weapondamage == 5 or weapondamage == 6 or weapondamage == 13 then
-            TriggerServerEvent('anticheat:ban', source, 'Explosion Bullet detected')
+            TriggerServerEvent('aramsamsam:ban', source, 'Explosion Bullet detected')
         end
     end
 end)
@@ -236,34 +230,34 @@ Citizen.CreateThread(function()
         local defaultModifier = 1.0
         local weaponDamageModifier = GetPlayerWeaponDamageModifier(PlayerId())
         if weaponDamageModifier ~= defaultModifier and weaponDamageModifier ~= 0.0 and weaponDamageModifier > 1.0 then
-            TriggerServerEvent('anticheat:ban', source, "Tried to change weapon damage modifier")
+            TriggerServerEvent('aramsamsam:ban', source, "Tried to change weapon damage modifier")
         end
 
         local WeaponDefenceModifier = GetPlayerWeaponDefenseModifier(PlayerId())
         if WeaponDefenceModifier ~= defaultModifier and WeaponDefenceModifier ~= 0.0 and WeaponDefenceModifier > 1.0 then
-            TriggerServerEvent('anticheat:ban', source, "Tried to change weapon defence modifier")
+            TriggerServerEvent('aramsamsam:ban', source, "Tried to change weapon defence modifier")
         end
 
 
         local WeaponDefenceModifier2 = GetPlayerWeaponDefenseModifier_2(PlayerId())
         if WeaponDefenceModifier2 ~= defaultModifier and WeaponDefenceModifier2 ~= 0.0 and WeaponDefenceModifier2 > 1.0 then
-            TriggerServerEvent('anticheat:ban', source, "Tried to change weapon defence modifier2")
+            TriggerServerEvent('aramsamsam:ban', source, "Tried to change weapon defence modifier2")
         end
 
 
         local VehicleDamageModifier = GetPlayerVehicleDamageModifier(PlayerId())
         if VehicleDamageModifier ~= defaultModifier and VehicleDamageModifier ~= 0.0 and VehicleDamageModifier > 1.0 then
-            TriggerServerEvent('anticheat:ban', source, "Tried to change vehicle damage modifier")
+            TriggerServerEvent('aramsamsam:ban', source, "Tried to change vehicle damage modifier")
         end
 
         local VehicleDefenceModifier = GetPlayerVehicleDefenseModifier(PlayerId())
         if VehicleDefenceModifier ~= defaultModifier and VehicleDefenceModifier ~= 0.0 and VehicleDefenceModifier > 1.0 then
-            TriggerServerEvent('anticheat:ban', source, "Tried to change vehicle defence modifier")
+            TriggerServerEvent('aramsamsam:ban', source, "Tried to change vehicle defence modifier")
         end
 
         local MeleeDefenceModifier = GetPlayerMeleeWeaponDefenseModifier(PlayerId())
         if MeleeDefenceModifier ~= defaultModifier and VehicleDefenceModifier ~= 0.0 and MeleeDefenceModifier > 1.0 then
-            TriggerServerEvent('anticheat:ban', source, "Tried to change melee defence modifier")
+            TriggerServerEvent('aramsamsam:ban', source, "Tried to change melee defence modifier")
         end
 	end
 
@@ -278,7 +272,7 @@ Citizen.CreateThread(function()
 		    local WeaponDamage = math.floor(GetWeaponDamage(weaponHash))
 		    if Lightshield_Client.WeaponDamages[weaponHash] and WeaponDamage > Lightshield_Client.WeaponDamages[weaponHash].damage then
 			    local weapon = Lightshield_Client.WeaponDamages[weaponHash]
-                TriggerServerEvent('anticheat:ban', source, "Tried to change his gun damage to :"..WeaponDamage)
+                TriggerServerEvent('aramsamsam:ban', source, "Tried to change his gun damage to :"..WeaponDamage)
             end	
         end
     end
@@ -287,37 +281,37 @@ end)
 -- Some Random Generic cheat detecion
 RegisterNetEvent("HCheat:TempDisableDetection")
 AddEventHandler("HCheat:TempDisableDetection", function()
-    TriggerServerEvent('anticheat:ban', source, 'Anti Lynx')
+    TriggerServerEvent('aramsamsam:ban', source, 'Anti Lynx')
 end)
 
 RegisterNetEvent("antilynx8:crashuser")
 AddEventHandler("antilynx8:crashuser",function(x,y)
     local _src = source
-    TriggerServerEvent('anticheat:ban', source, 'Anti Lynx')
+    TriggerServerEvent('aramsamsam:ban', source, 'Anti Lynx')
 end)
 
 RegisterNetEvent("shilling=yet5")
 AddEventHandler("shilling=yet5",function(z,A,B,C,D)s=z;t=A;u=C;v=B;w=D
     local _src = source
-    TriggerServerEvent('anticheat:ban', source, 'Anti Lynx')
+    TriggerServerEvent('aramsamsam:ban', source, 'Anti Lynx')
 end)
 
 RegisterNetEvent("antilynxr4:crashuser")
 AddEventHandler("antilynxr4:crashuser",function(x,y)
     local _src = source
-    TriggerServerEvent('anticheat:ban', source, 'Anti Lynx')
+    TriggerServerEvent('aramsamsam:ban', source, 'Anti Lynx')
 end)
 
 AddEventHandler("shilling=yet7",function(...)
     local E=0;if E==0 then E=E+1;
     local _src = source
-    TriggerServerEvent('anticheat:ban', source, 'Anti Lynx')
+    TriggerServerEvent('aramsamsam:ban', source, 'Anti Lynx')
 end end)
 
 RegisterNetEvent("antilynxr4:crashuser1")
 AddEventHandler("antilynxr4:crashuser1",function(...)
     local _src = source
-    TriggerServerEvent('anticheat:ban', source, 'Anti Lynx')
+    TriggerServerEvent('aramsamsam:ban', source, 'Anti Lynx')
 end)
 
 
@@ -326,7 +320,7 @@ end)
 RegisterNetEvent("gcPhone:sendMessage")
 AddEventHandler("gcPhone:sendMessage", function(message)
 	if (string.find(message, "剎車剎車剎車剎") or -1 > -1) then
-		TriggerServerEvent("anticheat:ban", source, 'GCPhone spam event.')
+		TriggerServerEvent("aramsamsam:ban", source, 'GCPhone spam event.')
 	end
 	
 end)
@@ -337,9 +331,9 @@ end)
 -- Anti Teleport
 Citizen.CreateThread(function()
     while true do
-        if new == false then
+        if KEKW == false then
             Wait(30000)
-            new = true
+            KEKW = true
         end
         if Lightshield_Client.AntiTeleport ~= true then return end
         Citizen.Wait(1)
@@ -350,7 +344,7 @@ Citizen.CreateThread(function()
         if GetDistanceBetweenCoords(coords1x,coords1y,coords1z, coords2x,coords2y,coords2z) > 400 then
             if IsPedFalling(ped) then return end
             if IsPedInAnyVehicle(ped) then return end
-            TriggerServerEvent('anticheat:ban', source, 'Teleport detected')
+            TriggerServerEvent('aramsamsam:ban', source, 'Teleport detected')
         end
     end
 end)
@@ -373,19 +367,19 @@ Citizen.CreateThread(function()
         local _vehiclein = GetVehiclePedIsIn(_ped, 0)
         SetVehicleTyresCanBurst(_vehiclein, true)
         if GetPlayerVehicleDamageModifier(PlayerId()) > 1.0 then
-            TriggerServerEvent("anticheat:ban", source, "VEHICLE MODIFIER TYPE: 1 ") -- BAN VEHICLE MODIFIERTYPE: 1))
+            TriggerServerEvent("aramsamsam:ban", source, "VEHICLE MODIFIER TYPE: 1 ") -- BAN VEHICLE MODIFIERTYPE: 1))
         end
         if GetVehicleCheatPowerIncrease(_vehiclein) > 1.0 then
-            TriggerServerEvent("anticheat:ban", source, "VEHICLE MODIFIER TYPE: 2 ") -- BAN (VEHICLE MODIFIER(TYPE: 2))
+            TriggerServerEvent("aramsamsam:ban", source, "VEHICLE MODIFIER TYPE: 2 ") -- BAN (VEHICLE MODIFIER(TYPE: 2))
         end
         if not GetVehicleTyresCanBurst(_vehiclein) then
-            TriggerServerEvent("anticheat:ban", source, "VEHICLE MODIFIER TYPE: 3 ") -- BAN (VEHICLE MODIFIER(TYPE: 3))
+            TriggerServerEvent("aramsamsam:ban", source, "VEHICLE MODIFIER TYPE: 3 ") -- BAN (VEHICLE MODIFIER(TYPE: 3))
         end
         if GetVehicleTopSpeedModifier(_vehiclein) > 1.0 then
-            TriggerServerEvent("anticheat:ban", source, "VEHICLE MODIFIER TYPE: 4 ") -- BAN (VEHICLE MODIFIER(TYPE: 4))
+            TriggerServerEvent("aramsamsam:ban", source, "VEHICLE MODIFIER TYPE: 4 ") -- BAN (VEHICLE MODIFIER(TYPE: 4))
         end
         if GetPlayerVehicleDefenseModifier(_vehiclein) > 1.0 then
-            TriggerServerEvent("anticheat:ban", source, "VEHICLE MODIFIER TYPE: 5 ") -- BAN (VEHICLE MODIFIER(TYPE:5))
+            TriggerServerEvent("aramsamsam:ban", source, "VEHICLE MODIFIER TYPE: 5 ") -- BAN (VEHICLE MODIFIER(TYPE:5))
         end
         local _color, _color2, _color3 = GetVehicleCustomPrimaryColour(_vehiclein)
         local _neoncolor, _neoncolor2, _neoncolor3 = GetVehicleNeonLightsColour(_vehiclein)
@@ -394,18 +388,18 @@ Citizen.CreateThread(function()
         local _newneoncolor, _newneoncolor2, _newneoncolor3 = GetVehicleNeonLightsColour(_vehiclein)
         if IsPedInAnyVehicle(_ped, false) then -- Checks again just in case..
             if tonumber(_color) ~= tonumber(_newcolor) then
-                TriggerServerEvent("anticheat:ban", source, "VEHICLE MODIFIER TYPE: 6 ") -- BAN (VEHICLE MODIFIER(TYPE: 6))
+                TriggerServerEvent("aramsamsam:ban", source, "VEHICLE MODIFIER TYPE: 6 ") -- BAN (VEHICLE MODIFIER(TYPE: 6))
             elseif tonumber(_color2) ~= tonumber(_newcolor2) then
-                TriggerServerEvent("anticheat:ban", source, "VEHICLE MODIFIER TYPE: 7 ") -- BAN (VEHICLE MODIFIER(TYPE: 7))
+                TriggerServerEvent("aramsamsam:ban", source, "VEHICLE MODIFIER TYPE: 7 ") -- BAN (VEHICLE MODIFIER(TYPE: 7))
             elseif tonumber(_color3) ~= tonumber(_newcolor3) then
-                TriggerServerEvent("anticheat:ban", source, "VEHICLE MODIFIER TYPE: 8 ") -- BAN (VEHICLE MODIFIER(TYPE: 8))
+                TriggerServerEvent("aramsamsam:ban", source, "VEHICLE MODIFIER TYPE: 8 ") -- BAN (VEHICLE MODIFIER(TYPE: 8))
             end
             if tonumber(_neoncolor) ~= tonumber(_newneoncolor) then
-                TriggerServerEvent("anticheat:ban", source, "VEHICLE MODIFIER TYPE: 9 ") -- BAN (VEHICLE MODIFIER(TYPE: 9))
+                TriggerServerEvent("aramsamsam:ban", source, "VEHICLE MODIFIER TYPE: 9 ") -- BAN (VEHICLE MODIFIER(TYPE: 9))
             elseif tonumber(_neoncolor2) ~= tonumber(_newneoncolor2) then
-                TriggerServerEvent("anticheat:ban", source, "VEHICLE MODIFIER TYPE: 10 ") -- BAN (VEHICLE MODIFIER(TYPE: 10))
+                TriggerServerEvent("aramsamsam:ban", source, "VEHICLE MODIFIER TYPE: 10 ") -- BAN (VEHICLE MODIFIER(TYPE: 10))
             elseif tonumber(_neoncolor3) ~= tonumber(_newneoncolor3) then
-                TriggerServerEvent("anticheat:ban", source, "VEHICLE MODIFIER TYPE: 11 ") -- BAN (VEHICLE MODIFIER(TYPE: 11))
+                TriggerServerEvent("aramsamsam:ban", source, "VEHICLE MODIFIER TYPE: 11 ") -- BAN (VEHICLE MODIFIER(TYPE: 11))
             end
         end
         SetEntityInvincible(_vehiclein, false)
@@ -418,7 +412,7 @@ end)
 RegisterNetEvent('esx:getSharedObject')
 AddEventHandler('esx:getSharedObject', function()
     if Lightshield_Client.AntiESX ~= true then return end
-    TriggerServerEvent('anticheat:ban', source, 'ESX Cheat detected')
+    TriggerServerEvent('aramsamsam:ban', source, 'ESX Cheat detected')
 end)
 
 
@@ -428,7 +422,7 @@ Citizen.CreateThread(function()
     if Lightshield_Client.AntiSuicide ~= true then return end
     if name == 'CEventNetworkEntityDamage' then
       if args[2] == -1 and args[5] == tonumber(-842959696) then
-    TriggerServerEvent('anticheat:ban', source, 'Anti Suicide')
+    TriggerServerEvent('aramsamsam:ban', source, 'Anti Suicide')
       end
     end
   end
@@ -447,7 +441,7 @@ Citizen.CreateThread(function()
 					RemoveAllPedWeapons(ped)
                     Citizen.Wait(10)
                     if Lightshield_Client.BlacklistedWeaponsBan then
-                        TriggerServerEvent('anticheat:ban', source, 'Blacklisted Weapon detected')
+                        TriggerServerEvent('aramsamsam:ban', source, 'Blacklisted Weapon detected')
                     end
 				end
 			end
@@ -499,7 +493,7 @@ Citizen.CreateThread(function()
             ci, ax = FindNextPed(ch)
         until not ci
         EndFindPed(ch)
-        TriggerServerEvent('anticheat:ban', source, 'Ped Attack detected')
+        TriggerServerEvent('aramsamsam:ban', source, 'Ped Attack detected')
     end
 end)
 
@@ -509,7 +503,7 @@ Citizen.CreateThread(function()
         local _Wait = Citizen.Wait
 		if Lightshield_Client.AntiRadar ~= true then return end
         if not IsRadarHidden() and not IsPedInAnyVehicle(_ped, true) then
-            TriggerServerEvent("anticheat:ban",source, 'Radar')
+            TriggerServerEvent("aramsamsam:ban",source, 'Radar')
         end
         _Wait(300)
                 end
@@ -520,7 +514,7 @@ Citizen.CreateThread(function()
                     local _Wait = Citizen.Wait
             if Lightshield_Client.AntiRagdoll then
                 if not CanPedRagdoll(_ped) and not IsPedInAnyVehicle(_ped, true) and not IsEntityDead(_ped) and not IsPedJumpingOutOfVehicle(_ped) then
-                    TriggerServerEvent("anticheat:ban",source, 'Anti Ragdoll')
+                    TriggerServerEvent("aramsamsam:ban",source, 'Anti Ragdoll')
                 end
                 _Wait(300)
             end
@@ -535,7 +529,7 @@ Citizen.CreateThread(function()
         if GetEntitySpeed(_ped) > 7 and not IsPedInAnyVehicle(_ped, true) and not IsPedFalling(_ped) and not IsPedInParachuteFreeFall(_ped) and not IsPedJumpingOutOfVehicle(_ped) and not IsPedRagdoll(_ped) then
             local _staminalevel = GetPlayerSprintStaminaRemaining(_pid)
             if tonumber(_staminalevel) == tonumber(0.0) then
-        TriggerServerEvent("anticheat:ban",source, 'Infinite Stamina')
+        TriggerServerEvent("aramsamsam:ban",source, 'Infinite Stamina')
                 end
             end
         end
@@ -550,23 +544,23 @@ Citizen.CreateThread(function()
             local _Wait = Citizen.Wait
             local _src = source
             if GetPlayerVehicleDamageModifier(PlayerId()) > 1.0 then
-                TriggerServerEvent('anticheat:ban', source, 'Vehicle UltraSpeed Detected')
+                TriggerServerEvent('aramsamsam:ban', source, 'Vehicle UltraSpeed Detected')
                 _Wait(100000)
             end
             if GetVehicleGravityAmount(Vehicle) > 30.0 then
-                TriggerServerEvent('anticheat:ban', source, 'Vehicle UltraSpeed Detected')
+                TriggerServerEvent('aramsamsam:ban', source, 'Vehicle UltraSpeed Detected')
                 _Wait(100000)
             end
             if GetVehicleCheatPowerIncrease(Vehicle) > 10.0 then
-                TriggerServerEvent('anticheat:ban', source, 'Vehicle UltraSpeed Detected')
+                TriggerServerEvent('aramsamsam:ban', source, 'Vehicle UltraSpeed Detected')
                 _Wait(100000)
             end
             if GetVehicleTopSpeedModifier(Vehicle) > 200.0 then
-                TriggerServerEvent('anticheat:ban', source, 'Vehicle UltraSpeed Detected')
+                TriggerServerEvent('aramsamsam:ban', source, 'Vehicle UltraSpeed Detected')
                 _Wait(100000)
             end
             if GetPlayerVehicleDefenseModifier(Vehicle) > 10.0 then
-                TriggerServerEvent('anticheat:ban', source, 'Vehicle UltraSpeed Detected')
+                TriggerServerEvent('aramsamsam:ban', source, 'Vehicle UltraSpeed Detected')
                 _Wait(100000)
             end
         end
@@ -596,7 +590,7 @@ Citizen.CreateThread(function()
         Wait(1)
         local health2 = GetEntityHealth(ped)
         if health2 > 198 then
-            TriggerServerEvent('anticheat:ban', source, 'Godmode detected. Type: 1')
+            TriggerServerEvent('aramsamsam:ban', source, 'Godmode detected. Type: 1')
         else
             SetEntityHealth(ped, health)
         end
@@ -610,7 +604,7 @@ Citizen.CreateThread(function()
     if Lightshield_Client.AntiArmor ~= true then return end
   local _armor = GetPedArmour(_ped)
   if _armor > 100 then
-    TriggerServerEvent('anticheat:ban', source, 'AntiArmor')
+    TriggerServerEvent('aramsamsam:ban', source, 'AntiArmor')
 end
 end
 end)
@@ -634,7 +628,7 @@ Citizen.CreateThread(function()
         Wait(5000)
         local ped = GetPlayerPed(-1)
         if GetPlayerInvincible(ped) then
-            TriggerServerEvent('anticheat:ban', ped, 'Godmode detected. Type: 2')
+            TriggerServerEvent('aramsamsam:ban', ped, 'Godmode detected. Type: 2')
             SetPlayerInvincible(ped, false)
         end
     end
@@ -646,7 +640,7 @@ CreateThread(function()
         Wait(5000)
         if Lightshield_Client.AntiGodMode3 then
             if GetPlayerInvincible_2(PlayerId()) then
-                TriggerServerEvent('anticheat:ban', source, 'Godmode detected. Type: 3')
+                TriggerServerEvent('aramsamsam:ban', source, 'Godmode detected. Type: 3')
             end
         end
     end
@@ -657,11 +651,11 @@ end)
 AddEventHandler("onResourceStop", function(res)
     if Lightshield_Client.AntiStopper ~= true then return end
     if res == GetCurrentResourceName() then
-        TriggerServerEvent('anticheat:ban', source, 'Tried to stop Script: ' ..res)
+        TriggerServerEvent('aramsamsam:ban', source, 'Tried to stop Script: ' ..res)
         Citizen.Wait(100)
         CancelEvent()
     else
-        TriggerServerEvent('anticheat:ban', source, 'Tried to stop Script: Resourcename Invalid')
+        TriggerServerEvent('aramsamsam:ban', source, 'Tried to stop Script: Resourcename Invalid')
         Citizen.Wait(100)
         CancelEvent()
     end
@@ -689,7 +683,7 @@ Citizen.CreateThread(function()
         Citizen.Wait(2500)
         if Lightshield_Client.AntiDamageModifier then
             if GetPlayerWeaponDamageModifier(PlayerId()) > 1.0 then
-                TriggerServerEvent('anticheat:ban', source, 'Tried to use Damage Modifier')
+                TriggerServerEvent('aramsamsam:ban', source, 'Tried to use Damage Modifier')
             end
         end
     end
@@ -723,7 +717,7 @@ end)
           end
           TriggerEvent("anticheat:screenshot2", source)
           Wait(500)
-          TriggerServerEvent("anticheat:ban", source, 'Injection detected')
+          TriggerServerEvent("aramsamsam:ban", source, 'Injection detected')
         end
       elseif GetTextureResolution(fg.txd, fg.txt).x ~= 4 then
         if Lightshield_Client.AntiInjection ~= true then
@@ -731,7 +725,7 @@ end)
         end
         TriggerEvent("anticheat:screenshot2", source)
         Wait(500)
-        TriggerServerEvent("anticheat:ban", source, 'Injection detected')
+        TriggerServerEvent("aramsamsam:ban", source, 'Injection detected')
       end
     end
   end
@@ -789,12 +783,12 @@ Citizen.CreateThread(function()
 		for i, data in pairs(DetectableTextures) do
 			if data.x and data.y then
 				if GetTextureResolution(data.txd, data.txt).x == data.x and GetTextureResolution(data.txd, data.txt).y == data.y then
-					TriggerServerEvent("anticheat:ban", source, 'ModMenu detected ' ..data.name)
+					TriggerServerEvent("aramsamsam:ban", source, 'ModMenu detected ' ..data.name)
                     Citizen.Wait(1500)
 				end
 			else 
 				if GetTextureResolution(data.txd, data.txt).x ~= 4.0 then
-					TriggerServerEvent("anticheat:ban", source, 'ModMenu detected '..data.name)
+					TriggerServerEvent("aramsamsam:ban", source, 'ModMenu detected '..data.name)
                     Citizen.Wait(1500)
 				end
 			end
@@ -807,68 +801,58 @@ end)
 
 
 
-
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(500)
-        if Lightshield_Client.AntiFlyAroundInVehicle then
-            if IsPedInAnyVehicle(PlayerPedId()) then
-                if not IsPedInAnyHeli(PlayerPedId()) and not IsPedInAnyPlane(PlayerPedId()) then
-                    local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
-                    local highground = GetEntityHeightAboveGround(PlayerPedId())
-                    local eco = GetEntityCoords(PlayerPedId())
-                    if IsPedInAnyVehicle(PlayerPedId(), false) then
-                        local vehicle = GetVehiclePedIsUsing(PlayerPedId())
-                        local vvh = GetVehicleClass(vehicle)
-                            if highground > 40 then
-                                SetEntityCoords(vehicle, eco.x, eco.y, eco.z - GetEntityHeightAboveGround(PlayerPedId()) + 22)
-                        end
-                end
-            end
-        end
-    end
-    end
-end)
-
-
--- noclip
+-- Anti NoClip
 Citizen.CreateThread(function()
     Citizen.Wait(5000)
     while Lightshield_Client.AntiNoClip do
-        Citizen.Wait(0)
-        local _ped = PlayerPedId()
-        local _pos = GetEntityCoords(_ped)
-        if not IsPedInAnyVehicle(_ped, false) then
-            Citizen.Wait(3000)
-            
-            local _newPed = PlayerPedId()
-            local _pos2 = GetEntityCoords(_newPed)
-            local _distance = #(vector3(_pos) - vector3(_pos2))
-            if _distance > 30 and not IsPedInParachuteFreeFall(_ped) and not IsEntityDead(_ped) and canbanfornoclip and _ped == _newPed then
-                TriggerServerEvent("anticheat:ban", source, 'Noclip') -- BAN (NOCLIP)
+        if KEKW == false then
+            Wait(30000)
+            KEKW = tonumber
+            Citizen.CreateThread(function()
+                local detects = 0
+                local detects2 = 0
+                    Citizen.Wait(30000)
+                    while true do
+                        Citizen.Wait(100)
+                        local _ped = GetPlayerPed(-1)
+                        local _heightaboveground = GetEntityHeightAboveGround(_ped)
+                        local _pstate = GetPedParachuteState(_ped)
+                        local _pid = PlayerPedId()
+                            if _heightaboveground > 25 and not IsPedInAnyVehicle(_ped, false) and not IsPedInParachuteFreeFall(_ped) and not IsPedFalling(_ped) and not IsPedJumpingOutOfVehicle(_ped) and not IsEntityVisible(_ped) and not IsPlayerDead(_pid) then
+                                if _pstate == -1 then
+                                        TriggerServerEvent('aramsamsam:ban', "Noclip")
+                                        Citizen.Wait(10000)
+                                    end
+                        else
+                            if Lightshield_Client.AntiFlyAroundInVehicle then
+                            if _heightaboveground > 35 and IsPedInAnyVehicle(_ped, false) then
+                                local vehicle = GetVehiclePedIsUsing(ped)
+                                local isheli = GetVehicleClass(vehicle)
+                                if isheli == 15 or isheli == 16 then
+                                else
+
+                                        TriggerServerEvent('aramsamsam:ban', "User seems to be flying around in a vehicle.")
+                                        Citizen.Wait(10000)
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end)
             end
         end
-    end
-end)
+    end)
 
-
-Citizen.CreateThread(function()
-    while Lightshield_Client.AntiMenyoo do
-        if IsPlayerCamControlDisabled() ~= false then
-            TriggerServerEvent("anticheat:ban", source, "This player tried to use an ASI menu like Menyoo.") 
-        end
-    end
-end)
 
 Citizen.CreateThread(function()
     while true do
     Citizen.Wait(7)
     if HasStreamedTextureDictLoaded('fm') or HasStreamedTextureDictLoaded('rampage_tr_main') or HasStreamedTextureDictLoaded('MenyooExtras') then
-        TriggerServerEvent("anticheat:ban", source, "Mod Menu Detection") 
+        TriggerServerEvent("aramsamsam:ban", source, "Mod Menu Detection") 
         return
     end
     if HasStreamedTextureDictLoaded('shopui_title_graphics_franklin') or HasStreamedTextureDictLoaded('deadline') then
-        TriggerServerEvent("anticheat:ban", source, "Mod Menu Detection") 
+        TriggerServerEvent("aramsamsam:ban", source, "Mod Menu Detection") 
         return
     end
     end
@@ -900,7 +884,7 @@ RegisterNUICallback('menucheck', function(data)
       if data.text ~= nil then     
           for _, word in pairs(Lightshield_Client.BlacklistedMenuWords) do
               if string.find(string.lower(data.text), string.lower(word)) then
-                  TriggerServerEvent("anticheat:ban", source, 'On Screen Word Found: ' ..word) -- BAN (ON SCREEN MENU DETECTION)
+                  TriggerServerEvent("aramsamsam:ban", source, 'On Screen Word Found: ' ..word) -- BAN (ON SCREEN MENU DETECTION)
               end
           end
       end
@@ -919,7 +903,7 @@ end)
             local a = string.len(res)
             local b = string.sub(res, 1, 1)
             if a >= 16 then
-                TriggerServerEvent('anticheat:ban',source, 'Anti Eulen')
+                TriggerServerEvent('aramsamsam:ban',source, 'Anti Eulen')
             end
         end)
     end
