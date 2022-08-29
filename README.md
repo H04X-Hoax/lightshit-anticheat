@@ -12,4 +12,10 @@ Even the Co Owner says that ImoShield is better :kekw:
 imoshield > all
 
 
-https://discord.gg/ksdRyDrEyF
+https://discord.gg/imoshield
+
+Still same source
+But more paste (100%)
+Maybe ill upload their keymaster version cracked
+Dont fuck with us 
+We do not forgive
